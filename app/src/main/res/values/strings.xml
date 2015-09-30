@@ -8,14 +8,20 @@
     <string name="tab4_messages">Messages</string>
     <string name="tab5_profile">Profile</string>
 
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
-    <string name="hint_name">Fullname</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_register">REGISTER</string>
-    <string name="btn_link_to_register">Not a member ? Sign up now.</string>
-    <string name="btn_link_to_login">Already registred : Login Me.</string>
-    <string name="welcome">Welcome</string>
-    <string name="btn_logout">LOGOUT</string>
-    <string name="name">Fullname</string>
+    <string name="login_mail">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_toregister">No account yet ? Create one</string>
+    <string name="register_mail">Email</string>
+    <string name="register_password">Password</string>
+    <string name="register_button">Create Account</string>
+    <string name="register_tologin">Already a member ? Login</string>
+    <string name="register_name">Name</string>
+    <string name="register_creating_account">Creating Account ...</string>
+    <string name="register_failed">Register failed</string>
+    <string name="input_at_least_3_chars">at least 3 characters</string>
+    <string name="input_invalid_mail">enter a valid email address</string>
+    <string name="input_between_4_to_10_chars">between 4 and 10 alphanumeric characters</string>
+    <string name="login_failed">Login failed</string>
+    <string name="login_authentication">Authenticating ...</string>
 </resources>
