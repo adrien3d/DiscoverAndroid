@@ -23,4 +23,7 @@
     <string name="input_between_4_to_10_chars">entre 4 et 10 charactères alphanumériques</string>
     <string name="input_invalid_mail">entrez une adresse mail valide</string>
     <string name="login_failed">Erreur de connexion</string>
+    <string name="cancel">Annuler</string>
+    <string name="nointernet_message">Veuillez activer votre connexion internet</string>
+    <string name="nointernet_title">Attention</string>
 </resources>

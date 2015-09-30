@@ -1,8 +1,13 @@
 package com.discover.android;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +37,32 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
-        
+
+        if (!isConnected()) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setTitle(getString(R.string.nointernet_title));
+            builder1.setMessage(getString(R.string.nointernet_message));
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(getString(R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Merci", Toast.LENGTH_SHORT)
+                                    .show();
+                            //dialog.cancel();
+                        }
+                    });
+            builder1.setNegativeButton(getString(R.string.cancel),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -55,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         Log.d(TAG, "Login");
 
-        if (!validate()) {
+        if (!validate()/* || !isConnected()*/) {
             onLoginFailed();
             return;
         }
@@ -81,9 +111,17 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 500);
     }
 
+    public boolean isConnected(){
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            return false;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -24,4 +24,8 @@
     <string name="input_between_4_to_10_chars">between 4 and 10 alphanumeric characters</string>
     <string name="login_failed">Login failed</string>
     <string name="login_authentication">Authenticating ...</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="nointernet_message">Please enable your data connexion</string>
+    <string name="nointernet_title">Warning</string>
 </resources>
