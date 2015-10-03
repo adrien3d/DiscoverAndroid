@@ -21,11 +21,18 @@
     <string name="register_failed">Register failed</string>
     <string name="input_at_least_3_chars">at least 3 characters</string>
     <string name="input_invalid_mail">enter a valid email address</string>
-    <string name="input_between_4_to_10_chars">between 4 and 10 alphanumeric characters</string>
     <string name="login_failed">Login failed</string>
     <string name="login_authentication">Authenticating ...</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="nointernet_message">Please enable your data connexion</string>
-    <string name="nointernet_title">Warning</string>
+    <string name="nointernet_message">Data connection unavailable. Get sure your wireless connection is enabled and try again</string>
+    <string name="nointernet_title">Connexion failed</string>
+    <string name="register_lastname">Last Name</string>
+    <string name="input_at_least_4_chars">at least 4 alphanumeric characters</string>
+    <string name="tab_1_cities">Cities</string>
+    <string name="city_lille">Lille</string>
+    <string name="city_lens">Lens</string>
+    <string name="city_paris">Paris</string>
+    <string name="guides_at">Guides at</string>
+    <string name="guide">Guide</string>
 </resources>

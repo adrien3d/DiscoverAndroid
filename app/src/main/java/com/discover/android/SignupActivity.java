@@ -18,6 +18,8 @@ public class SignupActivity extends AppCompatActivity {
 
     @InjectView(R.id.input_name)
     EditText _nameText;
+    @InjectView(R.id.input_lastname)
+    EditText _lastNameText;
     @InjectView(R.id.input_email)
     EditText _emailText;
     @InjectView(R.id.input_password)
@@ -66,6 +68,7 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.show();
 
         String name = _nameText.getText().toString();
+        String lastName = _lastNameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
@@ -100,6 +103,7 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
 
         String name = _nameText.getText().toString();
+        String lastname = _lastNameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
@@ -110,6 +114,13 @@ public class SignupActivity extends AppCompatActivity {
             _nameText.setError(null);
         }
 
+        if (lastname.isEmpty() || lastname.length() < 3) {
+            _lastNameText.setError(getString(R.string.input_at_least_3_chars));
+            valid = false;
+        } else {
+            _lastNameText.setError(null);
+        }
+
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError(getString(R.string.input_invalid_mail));
             valid = false;
@@ -117,8 +128,8 @@ public class SignupActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError(getString(R.string.input_between_4_to_10_chars));
+        if (password.isEmpty() || password.length() < 4) {
+            _passwordText.setError(getString(R.string.input_at_least_4_chars));
             valid = false;
         } else {
             _passwordText.setError(null);

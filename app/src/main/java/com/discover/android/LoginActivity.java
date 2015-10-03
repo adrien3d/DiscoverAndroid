@@ -165,8 +165,8 @@ public class LoginActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError(getString(R.string.input_between_4_to_10_chars));
+        if (password.isEmpty() || password.length() < 4) {
+            _passwordText.setError(getString(R.string.input_at_least_4_chars));
             valid = false;
         } else {
             _passwordText.setError(null);
