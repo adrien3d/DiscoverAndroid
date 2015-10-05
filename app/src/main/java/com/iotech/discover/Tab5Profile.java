@@ -1,10 +1,12 @@
-package com.discover.android;
+package com.iotech.discover;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.iotech.discover.R;
 
 /**
  * Created by adrien on 21/09/15.

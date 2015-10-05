@@ -1,4 +1,4 @@
-package com.discover.android;
+package com.iotech.discover;
 
 /**
  * Created by adrien on 19/09/15.

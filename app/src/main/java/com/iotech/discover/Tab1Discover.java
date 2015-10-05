@@ -1,4 +1,4 @@
-package com.discover.android;
+package com.iotech.discover;
 
 /**
  * Created by adrien on 19/09/15.
@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.iotech.discover.R;
 
 public class Tab1Discover extends Fragment {
     @Override

@@ -1,4 +1,4 @@
-package com.discover.android;
+package com.iotech.discover;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,6 +15,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.iotech.discover.R;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,28 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         if (!isConnected()) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-            builder1.setTitle(getString(R.string.nointernet_title));
-            builder1.setMessage(getString(R.string.nointernet_message));
-            builder1.setCancelable(true);
-            builder1.setPositiveButton(getString(R.string.ok),
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Toast.makeText(getApplicationContext(),
-                                    "Merci", Toast.LENGTH_SHORT)
-                                    .show();
-                            //dialog.cancel();
-                        }
-                    });
-            builder1.setNegativeButton(getString(R.string.cancel),
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
+            alertDialogNoInternet();
         }
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
-
+        loginGetTokenRequest();
+/*
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -111,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 500);
+                }, 500);*/
     }
 
     public boolean isConnected(){
@@ -173,5 +165,71 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    public void alertDialogNoInternet (){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle(getString(R.string.nointernet_title));
+        builder1.setMessage(getString(R.string.nointernet_message));
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(getString(R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(getApplicationContext(),
+                                "Merci", Toast.LENGTH_SHORT)
+                                .show();
+                        //dialog.cancel();
+                    }
+                });
+        builder1.setNegativeButton(getString(R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    public void loginGetTokenRequest(){
+        String tag_json_obj = "json_obj_req";
+
+        String url = "http://46.101.218.111/api/v1/auth";
+
+        //ProgressDialog pDialog = new ProgressDialog(this);
+        final ProgressDialog pDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+        pDialog.setMessage("Loading...");
+        pDialog.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        pDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", "a@a.a");
+                params.put("password", "aaaaaaaa");
+
+                return params;
+            }
+
+        };
     }
 }
