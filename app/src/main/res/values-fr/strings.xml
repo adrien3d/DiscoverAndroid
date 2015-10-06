@@ -34,4 +34,14 @@
     <string name="city_lens">Lens</string>
     <string name="guides_at">Guides à </string>
     <string name="guide">Guide</string>
+    <string name="register_address">Adresse</string>
+    <string name="register_birthdate">Date de naissance</string>
+    <string name="register_telNumber">Numéro de téléphone</string>
+    <string name="register_sex">Sexe</string>
+    <string name="birthdate_picker_title">Saisissez votre Date de naissance</string>
+
+    <string-array name="sex_array">
+        <item>Homme</item>
+        <item>Femme</item>
+    </string-array>
 </resources>

@@ -2,10 +2,12 @@ package com.iotech.discover;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,13 +18,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.iotech.discover.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -50,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
 
-        if (!isConnected()) {
+        if (!isInternetConnected()) {
             alertDialogNoInternet();
         }
 
@@ -93,7 +100,8 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
-        loginGetTokenRequest();
+        Context context = getApplicationContext();
+        loginAPI(context, email, password);
 /*
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -106,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                 }, 500);*/
     }
 
-    public boolean isConnected(){
+    public boolean isInternetConnected(){
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected())
@@ -192,44 +200,31 @@ public class LoginActivity extends AppCompatActivity {
         alert11.show();
     }
 
-    public void loginGetTokenRequest(){
-        String tag_json_obj = "json_obj_req";
+    public static void loginAPI (Context context, final String mail, final String password) {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("email", mail);
+            obj.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        String url = "http://46.101.218.111/api/v1/auth";
-
-        //ProgressDialog pDialog = new ProgressDialog(this);
-        final ProgressDialog pDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        pDialog.setMessage("Loading...");
-        pDialog.show();
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                url, null,
+        RequestQueue queue = Volley.newRequestQueue(context);
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, "http://46.101.218.111/api/v1/auth",obj,
                 new Response.Listener<JSONObject>() {
-
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d(TAG, response.toString());
-                        pDialog.hide();
+                        System.out.println(response);
+                        //hideProgressDialog();
                     }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", "a@a.a");
-                params.put("password", "aaaaaaaa");
-
-                return params;
-            }
-
-        };
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //hideProgressDialog();
+                        System.out.println(error);
+                    }
+                });
+        queue.add(jsObjRequest);
     }
 }

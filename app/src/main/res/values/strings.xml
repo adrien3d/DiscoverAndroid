@@ -16,7 +16,7 @@
     <string name="register_password">Password</string>
     <string name="register_button">Create Account</string>
     <string name="register_tologin">Already a member ? Login</string>
-    <string name="register_name">Name</string>
+    <string name="register_name">First Name</string>
     <string name="register_creating_account">Creating Account ...</string>
     <string name="register_failed">Register failed</string>
     <string name="input_at_least_3_chars">at least 3 characters</string>
@@ -35,4 +35,14 @@
     <string name="city_paris">Paris</string>
     <string name="guides_at">Guides at</string>
     <string name="guide">Guide</string>
+    <string name="register_address">Address</string>
+    <string name="register_birthdate">Birth Date</string>
+    <string name="register_telNumber">Telephone Number</string>
+    <string name="register_sex">Sex</string>
+    <string name="birthdate_picker_title">Pick your birthdate</string>
+    <string-array name="sex_array">
+        <item>Man</item>
+        <item>Woman</item>
+    </string-array>
+
 </resources>
