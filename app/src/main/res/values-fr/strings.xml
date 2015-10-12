@@ -44,4 +44,5 @@
         <item>Homme</item>
         <item>Femme</item>
     </string-array>
+    <string name="register_sex_dialog">Sélectionnez votre sexe</string>
 </resources>
