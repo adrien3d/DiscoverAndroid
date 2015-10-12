@@ -22,4 +22,13 @@
         android:layout_toRightOf="@+id/searchView"
         android:layout_toEndOf="@+id/searchView" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lille"
+        android:id="@+id/buttonLille"
+        android:layout_marginTop="62dp"
+        android:layout_below="@+id/searchView"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

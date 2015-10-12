@@ -1,39 +1,108 @@
 package com.iotech.discover;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapter.SimpleRecyclerAdapter;
+import model.VersionModel;
 
 /**
  * Created by adrien on 10/10/2015.
  */
 public class Tab1City extends AppCompatActivity {
-    @Override
+    /*@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_1_disc2_city);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+    }*/
+    CollapsingToolbarLayout collapsingToolbar;
+    RecyclerView recyclerView;
+    int mutedColor = R.attr.colorPrimary;
+    SimpleRecyclerAdapter simpleRecyclerAdapter;
 
-        /*ButterKnife.inject(this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        _loginButton.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_animate_toolbar);
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("Lille");
+
+        ImageView header = (ImageView) findViewById(R.id.header);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                R.drawable.header);
+
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            @SuppressWarnings("ResourceType")
             @Override
-            public void onClick(View v) {
-                login();
+            public void onGenerated(Palette palette) {
+
+                mutedColor = palette.getMutedColor(R.color.primary_500);
+                collapsingToolbar.setContentScrimColor(mutedColor);
+                collapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
             }
         });
 
-        _signupLink.setOnClickListener(new View.OnClickListener() {
+        recyclerView = (RecyclerView) findViewById(R.id.scrollableview);
 
-            @Override
-            public void onClick(View v) {
-                // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        List<String> listData = new ArrayList<String>();
+        int ct = 0;
+        for (int i = 0; i < VersionModel.data.length * 2; i++) {
+            listData.add(VersionModel.data[ct]);
+            ct++;
+            if (ct == VersionModel.data.length) {
+                ct = 0;
             }
-        });*/
+        }
+
+        if (simpleRecyclerAdapter == null) {
+            simpleRecyclerAdapter = new SimpleRecyclerAdapter(listData);
+            recyclerView.setAdapter(simpleRecyclerAdapter);
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

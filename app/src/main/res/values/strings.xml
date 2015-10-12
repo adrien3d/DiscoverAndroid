@@ -40,10 +40,6 @@
     <string name="register_telNumber">Telephone Number</string>
     <string name="register_sex">Sex</string>
     <string name="birthdate_picker_title">Pick your birthdate</string>
-    <string-array name="sex_array">
-        <item>Man</item>
-        <item>Woman</item>
-    </string-array>
     <string name="register_sex_dialog">Select your sex</string>
 
 </resources>

@@ -22,6 +22,8 @@
 
         <activity android:name="com.iotech.discover.LoginActivity" android:theme="@style/LogTheme.Dark" />
         <activity android:name="com.iotech.discover.SignupActivity" android:theme="@style/LogTheme.Dark" />
+        <activity android:name="com.iotech.discover.Tab1City" android:theme="@style/MyMaterialTheme" />
+        <activity android:name="com.iotech.discover.Tab1Guide" android:theme="@style/MyMaterialTheme" />
     </application>
 
 </manifest>

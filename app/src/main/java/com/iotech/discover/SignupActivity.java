@@ -1,7 +1,6 @@
 package com.iotech.discover;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.iotech.discover.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -143,7 +141,7 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
         String address = _addressText.getText().toString();
         String birthdate = _birthdateText.getText().toString();
-
+/*
         if (firstName.isEmpty() || firstName.length() < 3) {
             _firstNameText.setError(getString(R.string.input_at_least_3_chars));
             valid = false;
@@ -171,7 +169,7 @@ public class SignupActivity extends AppCompatActivity {
         } else {
             _passwordText.setError(null);
         }
-
+*/
         return valid;
     }
 
