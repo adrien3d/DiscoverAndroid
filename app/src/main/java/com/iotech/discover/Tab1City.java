@@ -1,5 +1,6 @@
 package com.iotech.discover;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -41,24 +42,27 @@ public class Tab1City extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_animate_toolbar);
+        Intent myIntent = getIntent();
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("Lille");
+        collapsingToolbar.setTitle(myIntent.getStringExtra("ville"));
 
         ImageView header = (ImageView) findViewById(R.id.header);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.header);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.header_lille);
+/*
+       if (ville.contains("lens")) {
+           bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.header_lens);
+        }*/
 
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @SuppressWarnings("ResourceType")
             @Override
             public void onGenerated(Palette palette) {
-
                 mutedColor = palette.getMutedColor(R.color.primary_500);
                 collapsingToolbar.setContentScrimColor(mutedColor);
                 collapsingToolbar.setStatusBarScrimColor(R.color.black_trans80);
@@ -73,7 +77,7 @@ public class Tab1City extends AppCompatActivity {
 
         List<String> listData = new ArrayList<String>();
         int ct = 0;
-        for (int i = 0; i < VersionModel.data.length * 2; i++) {
+        for (int i = 0; i < VersionModel.data.length * 3; i++) {
             listData.add(VersionModel.data[ct]);
             ct++;
             if (ct == VersionModel.data.length) {

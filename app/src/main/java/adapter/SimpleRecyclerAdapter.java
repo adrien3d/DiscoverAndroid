@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.iotech.discover.R;
 
 import java.util.ArrayList;
@@ -17,8 +18,10 @@ import java.util.List;
  * Created by Suleiman on 14-04-2015.
  */
 public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAdapter.VersionViewHolder> {
+    ColorGenerator generator = ColorGenerator.MATERIAL;
     List<String> versionModels;
     Boolean isHomeList = false;
+    String letter;
 
     public static List<String> homeActivitiesList = new ArrayList<String>();
     public static List<String> homeActivitiesSubList = new ArrayList<String>();
@@ -57,6 +60,17 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
 
     @Override
     public void onBindViewHolder(VersionViewHolder versionViewHolder, int i) {
+
+ /*       versionViewHolder.title.setText(versionModels.get(i));
+//        Get the first letter of list item
+        letter = String.valueOf(versionModels.get(i).charAt(0));
+
+//        Create a new TextDrawable for our image's background
+        TextDrawable drawable = TextDrawable.builder()
+                .buildRound(letter, generator.getRandomColor());
+
+        versionViewHolder.cardItemLayout..letter.setImageDrawable(drawable);
+*/
         if (isHomeList) {
             versionViewHolder.title.setText(homeActivitiesList.get(i));
             versionViewHolder.subTitle.setText(homeActivitiesSubList.get(i));

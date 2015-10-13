@@ -30,8 +30,9 @@ public class Tab1Discover extends Fragment {
             @Override
             public void onClick(View v) {
                 // Start the Signup activity
-                Intent intent = new Intent(getActivity(), Tab1City.class);
-                startActivity(intent);
+                Intent intentLille = new Intent(getActivity(), Tab1City.class);
+                intentLille.putExtra("ville", "Lille");
+                startActivity(intentLille);
             }
         });
 
