@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fitsSystemWindows="true">
+    android:background="@drawable/mlogin_paris_eiffel"
+    android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
@@ -11,7 +11,10 @@
         android:layout_height="wrap_content"
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp"
+        android:id="@+id/registerLayout">
+        <!-- android:background="@drawable/login_paris_eiffel"
+ android:scaleType="fitStart"-->
 
         <ImageView android:src="@drawable/logo"
             android:layout_width="wrap_content"

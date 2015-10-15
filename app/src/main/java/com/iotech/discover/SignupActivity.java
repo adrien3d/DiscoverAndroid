@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -241,11 +242,20 @@ public class SignupActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick (DialogInterface dialog,int which){
-                        // The 'which' argument contains the index position
-                        // of the selected item
+                        String[] sexArray =  getResources().getStringArray(R.array.sex_array);
+                        _sexText.setText(sexArray[which]);
                     }
                 }
         );
+
+        _sexText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                AlertDialog dialog = builder.create();
+                if (event.getAction() == MotionEvent.ACTION_DOWN) dialog.show();
+                return false;
+            }
+        });
 /*
         _sexText.setOnClickListener(new View.OnClickListener() {
             AlertDialog dialog = builder.create();
