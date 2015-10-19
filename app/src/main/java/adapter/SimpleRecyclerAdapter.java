@@ -1,6 +1,8 @@
 package adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,20 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.iotech.discover.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Suleiman on 14-04-2015.
+ * Created by adrien on 14/10/2015.
  */
 public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAdapter.VersionViewHolder> {
-    ColorGenerator generator = ColorGenerator.MATERIAL;
-    List<String> versionModels;
+    //ColorGenerator generator = ColorGenerator.MATERIAL;
+    List<String> noms;
+    List<String> types;
     Boolean isHomeList = false;
-    String letter;
+    //String letter;
 
     public static List<String> homeActivitiesList = new ArrayList<String>();
     public static List<String> homeActivitiesSubList = new ArrayList<String>();
@@ -29,7 +31,7 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
     OnItemClickListener clickListener;
 
 
-    public void setHomeActivitiesList(Context context) {
+    public void setGuidesList(Context context) {
         String[] listArray = context.getResources().getStringArray(R.array.home_activities);
         String[] subTitleArray = context.getResources().getStringArray(R.array.home_activities_subtitle);
         for (int i = 0; i < listArray.length; ++i) {
@@ -38,17 +40,16 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
         }
     }
 
-    public SimpleRecyclerAdapter(Context context) {
+    /*public SimpleRecyclerAdapter(Context context) {
         isHomeList = true;
         this.context = context;
-        setHomeActivitiesList(context);
-    }
+        setGuidesList(context);
+    }*/
 
-
-    public SimpleRecyclerAdapter(List<String> versionModels) {
+    public SimpleRecyclerAdapter(List<String> noms, List<String> types) {
         isHomeList = false;
-        this.versionModels = versionModels;
-
+        this.noms = noms;
+        this.types = types;
     }
 
     @Override
@@ -60,7 +61,6 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
 
     @Override
     public void onBindViewHolder(VersionViewHolder versionViewHolder, int i) {
-
  /*       versionViewHolder.title.setText(versionModels.get(i));
 //        Get the first letter of list item
         letter = String.valueOf(versionModels.get(i).charAt(0));
@@ -75,7 +75,8 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
             versionViewHolder.title.setText(homeActivitiesList.get(i));
             versionViewHolder.subTitle.setText(homeActivitiesSubList.get(i));
         } else {
-            versionViewHolder.title.setText(versionModels.get(i));
+            versionViewHolder.title.setText(noms.get(i));
+            versionViewHolder.subTitle.setText(types.get(i));
         }
     }
 
@@ -84,7 +85,7 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
         if (isHomeList)
             return homeActivitiesList == null ? 0 : homeActivitiesList.size();
         else
-            return versionModels == null ? 0 : versionModels.size();
+            return noms == null ? 0 : noms.size();
     }
 
 
@@ -100,17 +101,25 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
             title = (TextView) itemView.findViewById(R.id.listitem_name);
             subTitle = (TextView) itemView.findViewById(R.id.listitem_subname);
 
-            if (isHomeList) {
+            itemView.setOnClickListener(this);
+
+/*            if (isHomeList) {
                 itemView.setOnClickListener(this);
             } else {
-                subTitle.setVisibility(View.GONE);
-            }
+                //subTitle.setVisibility(View.GONE);
+            }*/
 
         }
 
         @Override
         public void onClick(View v) {
-            clickListener.onItemClick(v, getPosition());
+            //clickListener.onItemClick(v, getLayoutPosition());
+            int position = getLayoutPosition(); // gets item position
+            Snackbar.make(v, noms.get(position), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .setActionTextColor(Color.RED)
+                    .show();
+            System.out.println(position);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.iotech.discover;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapter.SimpleRecyclerAdapter;
-import model.VersionModel;
+import model.Guide;
 
 /**
  * Created by adrien on 10/10/2015.
@@ -36,6 +37,7 @@ public class Tab1City extends AppCompatActivity {
     RecyclerView recyclerView;
     int mutedColor = R.attr.colorPrimary;
     SimpleRecyclerAdapter simpleRecyclerAdapter;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,21 +77,42 @@ public class Tab1City extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        List<String> listData = new ArrayList<String>();
+        List<String> listNoms = new ArrayList<String>();
         int ct = 0;
-        for (int i = 0; i < VersionModel.data.length * 3; i++) {
-            listData.add(VersionModel.data[ct]);
+        for (int i = 0; i < Guide.noms.length; i++) {
+            listNoms.add(Guide.noms[ct]);
             ct++;
-            if (ct == VersionModel.data.length) {
+            if (ct == Guide.noms.length) {
+                ct = 0;
+            }
+        }
+
+        List<String> listTypes = new ArrayList<String>();
+        ct = 0;
+        for (int i = 0; i < Guide.types.length; i++) {
+            listTypes.add(Guide.types[ct]);
+            ct++;
+            if (ct == Guide.types.length) {
                 ct = 0;
             }
         }
 
         if (simpleRecyclerAdapter == null) {
-            simpleRecyclerAdapter = new SimpleRecyclerAdapter(listData);
+            simpleRecyclerAdapter = new SimpleRecyclerAdapter(listNoms, listTypes);
             recyclerView.setAdapter(simpleRecyclerAdapter);
         }
 
+        /*simpleRecyclerAdapter.SetOnItemClickListener(
+        new SimpleRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intentGuide = new Intent(Tab1City.this, Tab1Guide.class);
+                intentGuide.putExtra("position", position);
+                startActivity(intentGuide);
+            }
+        }
+        );*/
+        //simpleRecyclerAdapter.SetOnItemClickListener();
     }
 
     @Override

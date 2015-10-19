@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);  // hides action bar icon
-        getSupportActionBar().setDisplayShowTitleEnabled(false); // hides action bar title
+        /*getSupportActionBar().setDisplayShowHomeEnabled(false);  // hides action bar icon
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // hides action bar title*/
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         //tabLayout.addTab(tabLayout.newTab().setText("D").setIcon(tabIcons[0]));
