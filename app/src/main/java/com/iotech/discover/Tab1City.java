@@ -78,21 +78,13 @@ public class Tab1City extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         List<String> listNoms = new ArrayList<String>();
+        List<String> listTypes = new ArrayList<String>();
         int ct = 0;
         for (int i = 0; i < Guide.noms.length; i++) {
             listNoms.add(Guide.noms[ct]);
-            ct++;
-            if (ct == Guide.noms.length) {
-                ct = 0;
-            }
-        }
-
-        List<String> listTypes = new ArrayList<String>();
-        ct = 0;
-        for (int i = 0; i < Guide.types.length; i++) {
             listTypes.add(Guide.types[ct]);
             ct++;
-            if (ct == Guide.types.length) {
+            if (ct == Guide.noms.length) {
                 ct = 0;
             }
         }

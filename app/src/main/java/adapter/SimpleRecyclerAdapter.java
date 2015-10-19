@@ -1,8 +1,7 @@
 package adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.design.widget.Snackbar;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.iotech.discover.R;
+import com.iotech.discover.Tab1Guide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,11 +115,13 @@ public class SimpleRecyclerAdapter extends RecyclerView.Adapter<SimpleRecyclerAd
         public void onClick(View v) {
             //clickListener.onItemClick(v, getLayoutPosition());
             int position = getLayoutPosition(); // gets item position
-            Snackbar.make(v, noms.get(position), Snackbar.LENGTH_LONG)
+            /*Snackbar.make(v, noms.get(position), Snackbar.LENGTH_LONG)
                     .setAction("Action", null)
-                    .setActionTextColor(Color.RED)
                     .show();
-            System.out.println(position);
+            System.out.println(position);*/
+            Intent intentGuide = new Intent(v.getContext(), Tab1Guide.class);
+            intentGuide.putExtra("nom", noms.get(position));
+            v.getContext().startActivity(intentGuide);
         }
     }
 
