@@ -1,10 +1,10 @@
 package com.iotech.discover;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,18 +17,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import api.ApiService;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -47,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getWindow().setBackgroundDrawableResource(R.drawable.mlogin_paris_aerian);
         ButterKnife.inject(this);
 
         if (!isInternetConnected()) {
@@ -82,16 +78,16 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+       /* final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.login_authentication));
-        progressDialog.show();
+        progressDialog.show();*/
 
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+        // TODO : onLoginSuccess si auth ok côté serveur
         Context context = getApplicationContext();
         loginAPI(context, email, password);
 /*
@@ -150,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+/*        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError(getString(R.string.input_invalid_mail));
             valid = false;
         } else {
@@ -162,8 +158,8 @@ public class LoginActivity extends AppCompatActivity {
             valid = false;
         } else {
             _passwordText.setError(null);
-        }
-
+        }*/
+        onLoginSuccess();
         return valid;
     }
 
@@ -192,8 +188,8 @@ public class LoginActivity extends AppCompatActivity {
         alert11.show();
     }
 
-    public static void loginAPI (Context context, final String mail, final String password) {
-        JSONObject obj = new JSONObject();
+    public void loginAPI (Context context, final String mail, final String password) {
+       /* JSONObject obj = new JSONObject();
         try {
             obj.put("email", mail);
             obj.put("password", password);
@@ -217,6 +213,22 @@ public class LoginActivity extends AppCompatActivity {
                         System.out.println(error);
                     }
                 });
-        queue.add(jsObjRequest);
+        queue.add(jsObjRequest);*/
+        ApiService apiService = new RestAdapter.Builder().setEndpoint(ApiService.ENDPOINT).build().create(ApiService.class);
+
+        apiService.authentication(mail, password, new Callback<String>() {
+            @Override
+            public void success(String token, Response response) {
+                //loginOk
+                SharedPreferences.Editor editor = getSharedPreferences("pref", MODE_PRIVATE).edit();
+                editor.putString("token", token);
+                editor.commit();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(LoginActivity.this, "Erreur de connexion : " + error, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

@@ -41,5 +41,6 @@
     <string name="register_sex">Sex</string>
     <string name="birthdate_picker_title">Pick your birthdate</string>
     <string name="register_sex_dialog">Select your sex</string>
+    <string name="input_tel_10_digits">10 digits</string>
 
 </resources>
