@@ -107,6 +107,7 @@
     <orderEntry type="library" exported="" name="gson-2.3.1" level="project" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <orderEntry type="library" exported="" name="palette-v7-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-base-8.1.0" level="project" />
     <orderEntry type="library" exported="" name="com.amulyakhare.textdrawable-1.0.1" level="project" />
@@ -117,6 +118,8 @@
     <orderEntry type="library" exported="" name="design-23.1.0" level="project" />
     <orderEntry type="library" exported="" name="android-times-square-1.6.4" level="project" />
 =======
+=======
+>>>>>>> origin/master
 =======
 >>>>>>> origin/master
     <orderEntry type="library" exported="" name="palette-v7-23.0.1" level="project" />

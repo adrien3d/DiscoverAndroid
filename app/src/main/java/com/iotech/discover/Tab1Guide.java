@@ -5,10 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-<<<<<<< HEAD
 import android.support.v7.app.AlertDialog;
-=======
->>>>>>> origin/master
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -28,8 +25,6 @@ public class Tab1Guide extends AppCompatActivity {
 
         /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);*/
-<<<<<<< HEAD
-
         final Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar_guide);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,11 +53,8 @@ public class Tab1Guide extends AppCompatActivity {
                 builder.setPositiveButton("OK", null).setNegativeButton("Cancel",null).show();
 
             }
-        });
-=======
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(myIntent.getStringExtra("nom"));
->>>>>>> origin/master
     }
 }

@@ -88,7 +88,6 @@ public class Tab1City extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         List<String> listNoms = new ArrayList<String>();
-<<<<<<< HEAD
         List<String> listTypes = new ArrayList
                 <String>();
         int ct = 0;
@@ -123,7 +122,6 @@ public class Tab1City extends AppCompatActivity {
 
         //String raw = myIntent.getStringExtra("guidata");
         //GuideData datas = (new Gson()).fromJson(raw, GuideData.class);
-=======
         List<String> listTypes = new ArrayList<String>();
         int ct = 0;
         for (int i = 0; i < Guide.noms.length; i++) {
@@ -134,8 +132,6 @@ public class Tab1City extends AppCompatActivity {
                 ct = 0;
             }
         }
->>>>>>> origin/master
-
         if (simpleRecyclerAdapter == null) {
             simpleRecyclerAdapter = new SimpleRecyclerAdapter(listNoms, listTypes);
             recyclerView.setAdapter(simpleRecyclerAdapter);

@@ -16,16 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Api.ApiService;
-=======
-import api.ApiService;
->>>>>>> origin/master
-=======
-import api.ApiService;
->>>>>>> origin/master
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import retrofit.Callback;
@@ -235,15 +226,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void failure(RetrofitError error) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                Toast.makeText(LoginActivity.this, "Erreur de connexion : " + error, Toast.LENGTH_SHORT).show();
-=======
                 Toast.makeText(LoginActivity.this, "Erreur de connexion : " + error, Toast.LENGTH_LONG).show();
->>>>>>> origin/master
-=======
-                Toast.makeText(LoginActivity.this, "Erreur de connexion : " + error, Toast.LENGTH_LONG).show();
->>>>>>> origin/master
             }
         });
     }
