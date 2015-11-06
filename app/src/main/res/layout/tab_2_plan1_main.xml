@@ -14,4 +14,56 @@
     android:layout_centerHorizontal="true"
     android:layout_marginTop="12dp" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAjoutDispo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_action_add"/>
+
+    <Button
+        android:id="@+id/bSelectTimeRangeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Time Range"
+        android:layout_below="@+id/fabAjoutDispo"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tvSelectedTimeRangeFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_alignBottom="@+id/bSelectTimeRangeFragment"
+        android:layout_toRightOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Début"
+        android:id="@+id/debutAvail"
+        android:layout_alignTop="@+id/bSelectTimeRangeFragment"
+        android:layout_alignLeft="@+id/calendarView"
+        android:layout_alignStart="@+id/calendarView" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FIn"
+        android:id="@+id/finAvail"
+        android:layout_alignTop="@+id/bSelectTimeRangeFragment"
+        android:layout_alignRight="@+id/calendarView"
+        android:layout_alignEnd="@+id/calendarView" />
+
+    <CalendarView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/calendarView"
+        android:layout_below="@+id/bSelectTimeRangeFragment"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

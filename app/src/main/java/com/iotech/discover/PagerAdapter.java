@@ -3,6 +3,7 @@ package com.iotech.discover;
 /**
  * Created by adrien on 19/09/15.
  */
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -31,9 +32,16 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 3:
                 Tab4Messages tab4 = new Tab4Messages();
                 return tab4;
-            case 4:
+            case 4 :
                 Tab5Profile tab5 = new Tab5Profile();
-                return tab5;
+                return tab5;/*
+                return new PreferenceFragment() {
+                    @Override
+                    public void onCreate(Bundle savedInstanceState) {
+                        super.onCreate(savedInstanceState);
+                        addPreferencesFromResource(R.xml.settings);
+                    }
+                };*/
             default:
                 return null;
         }

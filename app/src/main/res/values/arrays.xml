@@ -17,10 +17,21 @@
         <item>Teacher</item>
     </string-array>
 
+    <string-array name="availGuide">
+        <item>Vendredi 20 Novembre 16-20h</item>
+        <item>Samedi 21 Novembre 16-20h</item>
+        <item>Diamnche 22 Novembre 16-20h</item>
+    </string-array>
+
 
     <string-array name="sex_array">
         <item>Man</item>
         <item>Woman</item>
     </string-array>
 
+
+    <string-array name="type_array">
+        <item>Guide</item>
+        <item>Voyageur</item>
+    </string-array>
 </resources>

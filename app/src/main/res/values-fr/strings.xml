@@ -45,4 +45,5 @@
         <item>Femme</item>
     </string-array>
     <string name="register_sex_dialog">Sélectionnez votre sexe</string>
+    <string name="input_tel_10_digits">10 chiffres</string>
 </resources>

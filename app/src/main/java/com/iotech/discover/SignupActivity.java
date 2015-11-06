@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,22 +17,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
+import Api.ApiService;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
@@ -62,6 +59,7 @@ public class SignupActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        getWindow().setBackgroundDrawableResource(R.drawable.mlogin_paris_eiffel);
         ButterKnife.inject(this);
         addCalendar();
         addSex();
@@ -105,7 +103,7 @@ public class SignupActivity extends AppCompatActivity {
         String address = _addressText.getText().toString();
         String birthdate = _birthdateText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
+        // TODO: onSignupSuccess() si l'enregistrement est ok côté serveur
         Context context = getApplicationContext();
         //registerAPI(context, firstName, lastName, email, address, birthdate, sex, telNumber, password);
 
@@ -140,9 +138,10 @@ public class SignupActivity extends AppCompatActivity {
         String lastName = _lastNameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
+        String telNumber = _telNumberText.getText().toString();
         String address = _addressText.getText().toString();
         String birthdate = _birthdateText.getText().toString();
-/*
+
         if (firstName.isEmpty() || firstName.length() < 3) {
             _firstNameText.setError(getString(R.string.input_at_least_3_chars));
             valid = false;
@@ -170,12 +169,19 @@ public class SignupActivity extends AppCompatActivity {
         } else {
             _passwordText.setError(null);
         }
-*/
+
+        if (telNumber.length() != 10) {
+            _telNumberText.setError(getString(R.string.input_tel_10_digits));
+            valid = false;
+        } else {
+            _telNumberText.setError(null);
+        }
+
         return valid;
     }
 
-    public static void registerAPI (Context context, final String firstName, final String lastName, final String mail, final String address, final String birthdate, final String sex, final String telNumber, final String password) {
-        JSONObject obj = new JSONObject();
+    public void registerAPI (Context context, final String firstName, final String lastName, final String mail, final String address, final String birthdate, final String sex, final String telNumber, final String password) {
+        /*JSONObject obj = new JSONObject();
         try {
             obj.put("first_name", firstName);
             obj.put("last_name", lastName);
@@ -205,13 +211,30 @@ public class SignupActivity extends AppCompatActivity {
                         System.out.println(error);
                     }
                 });
-        queue.add(jsObjRequest);
+        queue.add(jsObjRequest);*/
+
+        ApiService apiService = new RestAdapter.Builder().setEndpoint(ApiService.ENDPOINT).build().create(ApiService.class);
+
+        apiService.registration(firstName, lastName, mail, address, birthdate, sex, telNumber, password, new Callback<String>() {
+            @Override
+            public void success(String token, Response response) {
+                //register ok
+                SharedPreferences.Editor editor = getSharedPreferences("pref", MODE_PRIVATE).edit();
+                editor.putString("token", token);
+                editor.commit();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(SignupActivity.this, "Erreur de connexion : " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void addCalendar(){
+        //todo : don't display keyboard
         final Calendar myCalendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 myCalendar.set(Calendar.YEAR, year);
@@ -224,14 +247,18 @@ public class SignupActivity extends AppCompatActivity {
 
         };
 
-        _birthdateText.setOnClickListener(new View.OnClickListener() {
+        _birthdateText.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
                 DatePickerDialog dpd = new DatePickerDialog(SignupActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
+                myCalendar.setTime(new Date());
+                myCalendar.add(Calendar.YEAR, -16);
+                dpd.getDatePicker().setMaxDate(myCalendar.getTime().getTime());
                 dpd.setTitle(getString(R.string.birthdate_picker_title));
-                dpd.show();
+                if (event.getAction() == MotionEvent.ACTION_DOWN) dpd.show();
+                return false;
             }
         });
     }
@@ -256,10 +283,5 @@ public class SignupActivity extends AppCompatActivity {
                 return false;
             }
         });
-/*
-        _sexText.setOnClickListener(new View.OnClickListener() {
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        });*/
     }
 }

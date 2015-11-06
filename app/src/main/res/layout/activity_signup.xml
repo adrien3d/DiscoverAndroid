@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayoutSignup"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/mlogin_paris_eiffel"
+    android:layout_height="fill_parent">
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:fillViewport="true">
+    <!-- android:background="@drawable/mlogin_paris_eiffel"-->
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:paddingTop="56dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
@@ -83,8 +87,9 @@
             <EditText android:id="@+id/input_birthdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="@string/register_birthdate" />
+                android:hint="@string/register_birthdate"
+                android:editable="false"
+                android:inputType="none" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Address Label -->
@@ -109,7 +114,8 @@
             <EditText android:id="@+id/input_sex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textCapWords"
+                android:inputType="none"
+                android:editable="false"
                 android:hint="@string/register_sex" />
         </android.support.design.widget.TextInputLayout>
 
@@ -146,3 +152,4 @@
 
     </LinearLayout>
 </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,46 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/tab5_profile">
+
+        <CheckBoxPreference
+            android:key="checkbox_preference"
+            android:title="Notifications"
+            android:defaultValue="dzdz"/>
+
+        <ListPreference
+            android:key="list_frequency"
+            android:title="Notifications"
+            android:summary="Fréquence"
+            android:dialogTitle="Choisissez la fréquence"
+            android:entries="@array/type_array"
+            android:entryValues="@array/type_array"
+            android:dependency="checkbox_preference" />
+
+        <EditTextPreference
+            android:key="edittext_preference"
+            android:title="Mot de passe"
+            android:summary="Modifiez votre mot de passe"
+            android:dialogTitle="Nouveau mot de passe"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Autres">
+
+        <ListPreference
+            android:key="list_preference"
+            android:title="Type de profil"
+            android:dialogTitle="Type de profil"
+            android:entries="@array/type_array"
+            android:entryValues="@array/type_array" />
+
+        <Preference
+            android:title="À propos">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://iotech.fr/" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
